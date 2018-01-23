@@ -1,1 +1,4 @@
 # owasp-zap-glue-ci-images
+OWASP [Zap](https://github.com/zaproxy/zaproxy) is a great security tool that can easily be used in a CI/CD environment. [Glue](https://github.com/OWASP/glue) is another tool from OWASP that aimed to ease the integration of security tools into CI. You can read more in this [blog post](https://blog.solutotlv.com/dynamic-security-testing-made-easy?utm_source=github), where I've explained how to easily integrate Zap and Glue into CI/CD pipeline and build a valuable security tests.
+
+This repo contains images that make the process of integrating Zap and Glue into the ci simpler, by setting up various configuration that are required for the integration. The code is based on the work done by [Nataly Shrits](https://github.com/nataly87s), on [Tweek](https://github.com/Soluto/tweek) project. 
