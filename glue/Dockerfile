@@ -21,5 +21,3 @@ WORKDIR /app
 
 COPY run_glue.sh .
 RUN chmod +x run_glue.sh 
-
-CMD ./run_glue.sh $BASE_URL $SESSON_NAME /glue/GLUE_FILE
