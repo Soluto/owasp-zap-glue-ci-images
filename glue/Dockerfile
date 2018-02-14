@@ -1,11 +1,11 @@
 FROM ruby:2.4-alpine as build-context
 
-RUN apk add --update jq wget tar libffi-dev build-base ruby-dev curl curl-dev sqlite-dev && \
+RUN apk add --update jq wget tar libffi-dev build-base ruby-dev curl curl-dev sqlite-dev bash && \
     wget https://raw.githubusercontent.com/vishnubob/wait-for-it/8ed92e8cab83cfed76ff012ed4a36cef74b28096/wait-for-it.sh && \
     chmod +x wait-for-it.sh
 
 ARG GLUE_REPO=omerlh
-ARG GLUE_BRACNH=fix_zap_alerts_bug
+ARG GLUE_BRACNH=production
 ENV BASE_URL=""
 ENV SESSON_NAME=""
 ENV GLUE_FILE=""
