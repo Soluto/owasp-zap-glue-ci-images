@@ -6,6 +6,8 @@ set -e
 BASE_URL=$1
 SESSON_NAME=$2
 GLUE_FILE=$3
+ZAP_URL=$(echo $PROXY_URL | sed -e 's/https\?:\/\///')
+./wait-for-it.sh $ZAP_URL -t 300
 
 curl --fail $PROXY_URL/JSON/core/action/loadSession/?name=$SESSON_NAME 2> /dev/null
 
