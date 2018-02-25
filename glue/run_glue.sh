@@ -21,5 +21,5 @@ ruby /glue/bin/glue -t zap \
   --zap-host $ZAP_HOST --zap-port $ZAP_PORT --zap-passive-mode \
   -f teamcity \
   $BASE_URL \
-  --finding-file-path $GLUE_FILE
+  --finding-file-path $GLUE_FILE \
   --teamcity-min-level 1
