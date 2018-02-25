@@ -19,7 +19,7 @@ fi
 
 ruby /glue/bin/glue -t zap \
   --zap-host $ZAP_HOST --zap-port $ZAP_PORT --zap-passive-mode \
-  -f text \
+  -f teamcity \
   --exit-on-warn 0 \
   $BASE_URL \
   --finding-file-path $GLUE_FILE
