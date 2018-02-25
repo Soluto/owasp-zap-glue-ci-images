@@ -23,3 +23,4 @@ ruby /glue/bin/glue -t zap \
   --exit-on-warn 0 \
   $BASE_URL \
   --finding-file-path $GLUE_FILE
+  --teamcity-min-level 1
