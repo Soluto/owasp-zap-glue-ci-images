@@ -1,5 +1,7 @@
 FROM owasp/zap2docker-bare
 
+LABEL maintainer="omerlh@gmail.com"
+
 ENV ZAP_DIR=/home/zap/.ZAP
 
 RUN zap.sh -cmd -addonupdate -addoninstall pscanrulesAlpha -addoninstall pscanrulesBeta -addoninstall pscanrules
