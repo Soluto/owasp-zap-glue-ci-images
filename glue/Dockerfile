@@ -1,4 +1,4 @@
-FROM soluto/glue:1519736993736
+FROM soluto/glue:1519740115694
 
 LABEL maintainer="omerlh@gmail.com"
 
