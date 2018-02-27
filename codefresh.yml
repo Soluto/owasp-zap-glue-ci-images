@@ -1,0 +1,40 @@
+version: '1.0'
+steps:
+  BuildingZapImage:
+    title: Building Zap Image
+    type: build
+    image_name: soluto/zap-ci
+    working_directory: ./zap
+    dockerfile: zap/Dockerfile
+    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
+  BuildingGlueImage:
+    title: Building Glue Image
+    type: build
+    image_name: soluto/glue-ci
+    working_directory: ./glue
+    dockerfile: glue/Dockerfile
+    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
+  PushingZapToDockerRegistry:
+    title: Pushing Zap to Docker Registry
+    type: push
+    candidate: '${{BuildingZapImage}}'
+    tags: 
+      - latest
+      - '${{CF_BUILD_TIMESTAMP}}'
+    registry: docker-hub
+    when:
+      branch:
+        only:
+          - master
+  PushingGlueToDockerRegistry:
+    title: Pushing Glue to Docker Registry
+    type: push
+    candidate: '${{BuildingGlueImage}}'
+    tags: 
+      - latest
+      - '${{CF_BUILD_TIMESTAMP}}'
+    registry: docker-hub
+    when:
+      branch:
+        only:
+          - master
