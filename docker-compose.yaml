@@ -1,3 +1,10 @@
 version: '3'
 services:
   api:
+    
+  black-box:
+    build: ./tests/black-box
+    environment:
+      - API_URL=http://api
+      - TEAMCITY_PROJECT_NAME=logging-api
+      - PROXY_URL=http://zap:8090
