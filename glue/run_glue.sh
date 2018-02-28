@@ -9,7 +9,7 @@ GLUE_FILE=$3
 ZAP_URL=$(echo $PROXY_URL | sed -e 's/https\?:\/\///')
 ./wait-for-it.sh $ZAP_URL -t 300
 
-curl --fail $PROXY_URL/JSON/core/action/loadSession/?name=$SESSON_NAME 2> /dev/null
+curl -s --fail $PROXY_URL/JSON/core/action/loadSession/?name=$SESSON_NAME
 
 if [ "$(curl --fail "$PROXY_URL/JSON/core/view/messages/?baseurl=$BASE_URL&count=1" 2> /dev/null | jq '.messages | length')" -le "0" ];
 then
