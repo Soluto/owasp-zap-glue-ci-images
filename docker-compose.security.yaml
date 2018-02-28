@@ -6,7 +6,7 @@ services:
     volumes:
       - ./zap/session:/home/zap/.ZAP/session/:rw
   glue:
-    image: soluto/glue-ci:1519747404782
+    image: soluto/glue-ci:1519813874483
     environment:
       - ZAP_HOST=http://zap
       - ZAP_PORT=8090

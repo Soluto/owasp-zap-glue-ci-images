@@ -2,11 +2,10 @@
 
 # Abort script on error
 set -e
-set -x
 
 function run_tests()
 {
-  # Put here the code requires to run your tests (e.g. dotnet test)
+  # Here you should put the code to run your tests, e.g. dotnet test
 }
 
 if [ -z "$PROXY_URL" ]
@@ -17,29 +16,31 @@ else
   ls -la
   ZAP_URL=$(echo $PROXY_URL | sed -e 's/https\?:\/\///')
   ./wait-for-it.sh $ZAP_URL -t 300
-  echo "Zap is ready"
+  echo "ZAP is ready"
 
-  # Create new session
-  curl --fail $PROXY_URL/JSON/core/action/newSession 2> /dev/null
+  curl -s --fail $PROXY_URL/JSON/core/action/newSession
+  curl -s --fail $PROXY_URL/JSON/pscan/action/enableAllScanners
+  curl -s --fail $PROXY_URL/JSON/core/action/clearExcludedFromProxy
 
-  # Enable all scanners
-  curl --fail $PROXY_URL/JSON/pscan/action/enableAllScanners 2> /dev/null
+  # Add the rules you wish to ignore on this line, after the ids query param.
+  # curl -s --fail $PROXY_URL/JSON/pscan/action/disableScanners/?ids=
 
-  #Clear exclude from proxy
-  curl --fail $PROXY_URL/JSON/core/action/clearExcludedFromProxy 2> /dev/null
-
-  # Optional: disbable rules by ID, add the ruls you want to disable gloablly
-  # curl --fail $PROXY_URL/JSON/pscan/action/disableScanners/?ids=<> 2> /dev/null
-
-  # Ignore all URL by regex from scan
-  # curl --fail $PROXY_URL/JSON/core/action/excludeFromProxy/?regex=<> 2> /dev/null
+  # Add the URLs you wish to ignore on this line, after the regex query param - regex supported.
+  # curl -s --fail $PROXY_URL/JSON/core/action/excludeFromProxy/?regex=
 
   run_tests
 
-  echo "waiting for zap to finish scanning"
+  echo "waiting for ZAP to finish scanning"
 
   while [ "$(curl --fail $PROXY_URL/JSON/pscan/view/recordsToScan 2> /dev/null | jq '.recordsToScan')" != '"0"' ]; do sleep 1; done
 
-  # Save the session so we can open it in the next phase.
-  curl $PROXY_URL/JSON/core/action/saveSession/?name=blackbox\&overwrite=true 2> /dev/null
+  if [ "$(curl --fail $PROXY_URL/JSON/core/view/urls/?zapapiformat=JSON\&formMethod=GET\&baseurl= 2> /dev/null | jq '.urls | length' > 0)" == '"0"' ]; 
+  then 
+    echo "No URL was accessed by ZAP"
+    exit -55
+  fi
+
+  curl -s --fail $PROXY_URL/JSON/core/action/saveSession/?name=blackbox\&overwrite=true > /dev/null
+
+  echo "ZAP scan completed"
 fi

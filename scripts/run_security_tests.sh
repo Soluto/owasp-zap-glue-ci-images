@@ -2,12 +2,12 @@
 
 set -e
 
-api_file="docker-compose.local.yaml"
+api_file="docker-compose.ci.yaml"
 
 if [[ -z $IMAGE_TAG ]];
 then
-    api_file="docker-compose.ci.yaml"
+    api_file="docker-compose.local.yaml"
 fi
 
-docker-compose -f docker-compose.yml -f $api_file -f docker-compose.dast.yaml pull --parallel
-docker-compose -f docker-compose.yml -f $api_file -f docker-compose.dast.yaml run glue bash +x /app/run_glue.sh http://api blackbox /output/logging-api.txt
+docker-compose -f docker-compose.yaml -f $api_file -f docker-compose.security.yaml pull --parallel
+docker-compose -f docker-compose.yaml -f $api_file -f docker-compose.security.yaml run --rm glue bash /app/run_glue.sh http://api blackbox /output/logging-api.txt
