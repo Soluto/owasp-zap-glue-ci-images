@@ -70,7 +70,7 @@ CWE: 524        WASCID: 13      Rule ID: 10049
 * Now it's time to customize the security tests:
   * Ignore irrelevant rules by adding them to line 26 on `zap/run_test.sh`. You can find the rule id in the test output, like you see above - look for `Rule ID: 10049`.
   * Ignore irrelevant URLs by adding them to line 29 on `zap/run_test.sh`. You can find the URL in the test name.
-  * Ignore specific issues by marking them as `ignore` on `glue.json`. This is an example `glue.json:
+  * Ignore specific issues by marking them as `ignore` on `glue.json`. This is an example `glue.json`:
 ```
 {
   "ZAPhttp://api/Storable and Cacheable Content": "new",
@@ -88,4 +88,4 @@ The issue will be ignored until this date.
 Now all the tests should pass until a new issue found :)
 
 ## Acknowledge 
-This repo is based on the work done by [Nataly Shrits](https://github.com/nataly87s), on [Tweek](https://github.com/Soluto/tweek) project, with improvment to make it easier to use.
+This repo is based on the work done by [Nataly Shrits](https://github.com/nataly87s), on [Tweek](https://github.com/Soluto/tweek) project, with improvments to make it easier to use.
