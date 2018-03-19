@@ -3,6 +3,13 @@ OWASP [Zap](https://github.com/zaproxy/zaproxy) is a great security tool that ca
 
 This repo contains images that make the process of integrating Zap and Glue into the ci simpler, by setting up various configuration that are required for the integration. The code is based on the work done by [Nataly Shrits](https://github.com/nataly87s), on [Tweek](https://github.com/Soluto/tweek) project. 
 
+## Structure
+The repo contains 4 docker compose files:
+* `docker-compose.yaml` - Contain all the services required for test: depedencies, test runner and your API. Here you will specify all the common settings, but not the image - as this will change between CI and local run.
+* `docker-compose.ci` - Should be used in CI, pull the API docker image from a registry.
+* `docker-compose.local` - Should be used for local development, build the API from a dockerfile.
+* `docker-compose.security.yaml` - Contains Zap and Glue. Usually, you do not need to change this file.
+
 ## Using this repo
 To easily add security tests to your project, follow the following steps:
 * Copy all compose files and scripts folder to your project root folder
@@ -20,27 +27,11 @@ RUN dotnet restore && \
 * Modify the docker-compsoe files:
   * `docker-compose.yaml`: Change line 6 to point to your blackbox Dockerfile
   * `docker-compose.local.yaml`: Change line 5 to match to your API Dockerfile path
-  * Add other required services (mocks etc) to `docker-compose.yaml`. Don't forget adding dependencies.
-* Proxy your blackbox test via Zap. You need to configure the code running the test to use a proxy:
-  * dotnet:
-  ```
-    var url = Environment.GetEnvironmentVariable("API_URL") ?? "http://localhost:5000";
-    ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-
-    var proxyUrl = Environment.GetEnvironmentVariable("PROXY_URL");
-    var handler = new HttpClientHandler();
-
-    if (proxyUrl != null)
-    {
-        handler.Proxy = new WebProxy(proxyUrl, false);
-    }
-
-    HttpClient = new HttpClient(handler) {BaseAddress = new Uri(url)};
-  ```
+  * Add other required services (mocks etc) to `docker-compose.yaml`.
 * Run your tests by running `./scripts/run_tests.sh`:
   * Make sure your tests actually running (e.g. look for your test output)
   * Look for the following line, indicating that Zap's scan completed: `ZAP scan completed`.
-  * If you see the following line `No URL was accessed by ZAP`, it means that you did not proxy your tests via Zap.
+  * If you see the following line `No URL was accessed by ZAP`, it means that from some reason, Zap did not proxy your test. Make sure the http client you're using honor `http_proxy` environment variable.
 * Now, run security tests by running: `./scripts/run_security_tests.sh`
   * On the first run you will some some errors, usually false positive. This is an example output:
 ```

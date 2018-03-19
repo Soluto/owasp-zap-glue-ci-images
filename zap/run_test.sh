@@ -2,11 +2,14 @@
 
 # Abort script on error
 set -e
+set -x
 
 function run_tests()
 {
   # Here you should put the code to run your tests, e.g. dotnet test
 }
+
+PROXY_URL=$http_proxy
 
 if [ -z "$PROXY_URL" ]
 then
