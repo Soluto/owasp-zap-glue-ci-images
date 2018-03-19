@@ -20,8 +20,7 @@ To easily add security tests to your project, follow the following steps:
   * Add the following lines to the begging of your blackbox`s Dockerfile:
 ```
 COPY install_dependencies.sh ./
-RUN dotnet restore && \
-    ./install_dependencies.sh
+RUN ./install_dependencies.sh
 ```
 * Modify `run_test.sh`: Change line 9 to actualy running your tests (e.g. `dotnet test`).
 * Modify the docker-compsoe files:
@@ -85,4 +84,8 @@ Just find the relevant issue (by the test name, which is the same as the key in 
 You can also postpone issues by setting the value to `postpone:%d-%m-%Y`, with the desired date.
 The issue will be ignored until this date.
 * Fix the rest of the issues!
-* Now all the tests should pass until a new issue found!
+
+Now all the tests should pass until a new issue found :)
+
+## Acknowledge 
+This repo is based on the work done by [Nataly Shrits](https://github.com/nataly87s), on [Tweek](https://github.com/Soluto/tweek) project, with improvment to make it easier to use.
