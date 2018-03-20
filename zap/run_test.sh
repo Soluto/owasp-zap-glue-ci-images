@@ -37,7 +37,7 @@ else
 
   while [ "$(curl --fail $PROXY_URL/JSON/pscan/view/recordsToScan 2> /dev/null | jq '.recordsToScan')" != '"0"' ]; do sleep 1; done
 
-  if [ "$(curl --fail $PROXY_URL/JSON/core/view/urls/?zapapiformat=JSON\&formMethod=GET\&baseurl= 2> /dev/null | jq '.urls | length' > 0)" == '"0"' ]; 
+  if [ "$(curl --fail $PROXY_URL/JSON/core/view/urls/?zapapiformat=JSON\&formMethod=GET\&baseurl= 2> /dev/null | jq '.urls | length')" == 0 ]; 
   then 
     echo "No URL was accessed by ZAP"
     exit -55
