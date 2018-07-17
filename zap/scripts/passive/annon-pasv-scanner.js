@@ -24,7 +24,7 @@ function scan(ps, msg, src)
     headers = msg.getRequestHeader().getHeaders("Authorization");
     
     // Might want to check here to see if the URL is in scope: msg.isInScope()
-    if (headers == null && msg.getResponseHeader().getStatusCode() == 200)
+    if (headers == null && msg.getResponseHeader().getStatusCode() != 401 && msg.getResponseHeader().getStatusCode() != 403)
     {
         ps.raiseAlert(alertRisk, alertReliability, alertTitle, alertDesc, url, '', '', '', alertSolution, headers, cweId, wascId, msg);
     }
