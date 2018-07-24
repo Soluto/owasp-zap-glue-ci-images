@@ -9,3 +9,5 @@ services:
       - TEAMCITY_PROJECT_NAME=logging-api
       - http_proxy=http://zap:8090
       - https_proxy=http://zap:8090
+    volumes:
+      - ./zap/session:/reports

@@ -43,7 +43,8 @@ else
     exit -55
   fi
 
-  curl -s --fail $PROXY_URL/JSON/core/action/saveSession/?name=blackbox\&overwrite=true > /dev/null
-
+  curl --fail $PROXY_URL/OTHER/core/other/jsonreport/?formMethod=GET --output /reports/report.json
+  curl --fail $PROXY_URL/OTHER/core/other/htmlreport/?formMethod=GET --output /reports/report.html
+  
   echo "ZAP scan completed"
 fi

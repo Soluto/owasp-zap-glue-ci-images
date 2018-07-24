@@ -1,16 +1,12 @@
-FROM soluto/glue:1519813692779
+FROM owasp/glue:raw-latest@sha256:eefac15b3e2b42d56f4c1146750d5a98913bfe95db592c2e72a2b5629cc6612c
 
-LABEL maintainer="omerlh@gmail.com"
+LABEL maintainer="omer.levihevroni@owasp.org"
 
 WORKDIR /app
 
-RUN apk add --update jq wget bash curl && \
-    wget https://raw.githubusercontent.com/vishnubob/wait-for-it/8ed92e8cab83cfed76ff012ed4a36cef74b28096/wait-for-it.sh && \
-    chmod +x wait-for-it.sh
+RUN apk add --update --no-cache jq 
 
-ENV BASE_URL=""
-ENV SESSON_NAME=""
 ENV GLUE_FILE=""
 
-COPY run_glue.sh .
+COPY . .
 RUN chmod +x run_glue.sh 

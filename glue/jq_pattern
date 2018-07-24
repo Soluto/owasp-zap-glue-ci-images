@@ -1,0 +1,15 @@
+{ "@name" : .site."@name",
+  "alerts": 
+  [.site.alerts[] as $in 
+  | $in.instances[] as $h 
+  | $in
+  | $h * $in
+  | {
+      "description": $in.desc, 
+      "source": "URI: \($h.uri) Method: \($h.method)",
+      "detail": "\($in.name) \n Evidence: \($h.evidence) \n Solution: \($in.solution) \n Other info: \($in.otherinfo) \n Reference: \($in.reference)",
+      "severity": $in.riskdesc | split(" ") | .[0],
+      "fingerprint": "\($in.pluginid)_\($h.uri)_\($h.method)" 
+    }
+  ]
+} 

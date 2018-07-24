@@ -31,6 +31,8 @@ RUN ./install_dependencies.sh
   * Make sure your tests actually running (e.g. look for your test output)
   * Look for the following line, indicating that Zap's scan completed: `ZAP scan completed`.
   * If you see the following line `No URL was accessed by ZAP`, it means that from some reason, Zap did not proxy your test. Make sure the http client you're using honor `http_proxy` environment variable.
+* Clean up the tests by running `./scripts/teardown_tests.sh`
+* Zap will produce reports in JSON and HTML format. Copy the JSON report into `glue` folder in the root of your project.
 * Now, run security tests by running: `./scripts/run_security_tests.sh`
   * On the first run you will some some errors, usually false positive. This is an example output:
 ```
