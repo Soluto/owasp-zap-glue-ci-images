@@ -16,7 +16,7 @@ To easily add security tests to your project, follow the following steps:
 * Copy `zap/run_test.sh` to your blackbox tests folder. 
   * Also change the Dockerfile of your blackbox: It should now run this script instead.
 * Copy `zap/install_dependencies.sh` to your blackbox tests folder.
-  * It's for debian based images, but if your images is based upon alpin - comment line 3 and uncomment line 4.
+  * It's for debian based images, but if your images is based upon alpine - comment line 3 and uncomment line 4.
   * Add the following lines to the begging of your blackbox`s Dockerfile:
 ```
 COPY install_dependencies.sh ./
@@ -90,4 +90,4 @@ The issue will be ignored until this date.
 Now all the tests should pass until a new issue found :)
 
 ## Acknowledge 
-This repo is based on the work done by [Nataly Shrits](https://github.com/nataly87s), on [Tweek](https://github.com/Soluto/tweek) project, with improvments to make it easier to use.
+This repo is based on the work done by [Nataly Shrits](https://github.com/nataly87s), on [Tweek](https://github.com/Soluto/tweek) project, with improvements to make it easier to use.
