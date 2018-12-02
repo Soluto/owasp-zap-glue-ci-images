@@ -6,7 +6,7 @@ services:
     build: ./tests/black-box
     environment:
       - API_URL=http://api
-      - TEAMCITY_PROJECT_NAME=logging-api
+      - TEAMCITY_PROJECT_NAME=test
       - http_proxy=http://zap:8090
       - https_proxy=http://zap:8090
     volumes:
