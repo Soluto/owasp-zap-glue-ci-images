@@ -1,6 +1,6 @@
-FROM owasp/zap2docker-bare
+FROM owasp/zap2docker-weekly
 
-LABEL maintainer="omerlh@gmail.com"
+LABEL maintainer="omer.levihevroni@owasp.org"
 
 ENV ZAP_DIR=/home/zap/.ZAP
 
@@ -12,7 +12,7 @@ COPY config.xml $ZAP_DIR/
 
 USER root
 
-RUN chown zap $ZAP_DIR/config.xml && chgrp zap $ZAP_DIR/config.xml
+RUN chown zap $ZAP_DIR && chgrp zap $ZAP_DIR
 
 USER zap
 

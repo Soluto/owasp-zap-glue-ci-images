@@ -1,6 +1,6 @@
-{ "@name" : .site."@name",
+{ "@name" : .site[0]."@name",
   "alerts": 
-  [.site.alerts[] as $in 
+  [.site[] | .alerts[] as $in 
   | $in.instances[] as $h 
   | $in
   | $h * $in
