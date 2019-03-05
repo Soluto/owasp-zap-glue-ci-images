@@ -14,4 +14,5 @@ ruby /glue/bin/glue -t Dynamic \
   -f teamcity \
   --finding-file-path $GLUE_FILE \
   --teamcity-min-level 1 \
-  --mapping-file /app/zaproxy_mapping.json
+  --mapping-file /app/zaproxy_mapping.json \
+  -z 1
