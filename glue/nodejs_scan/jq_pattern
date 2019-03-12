@@ -1,0 +1,11 @@
+{
+    "name": env.APP_NAME,
+    "issues": [.sec_issues | . [] | . [] as $i |
+    {
+        "detail": $i.description,
+        "description": $i.title,
+        "source": "File: \($i.path) Line: \($i.line)",
+        "severity": "Medium",
+        "fingerprint": $i.sha2
+    } ]
+}
