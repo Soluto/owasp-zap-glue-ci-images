@@ -2,7 +2,6 @@
 
 # Abort script on error
 set -e
-set -x 
 
 GLUE_FILE=$1
 REPORT_FILE=$2
